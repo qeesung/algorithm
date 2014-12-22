@@ -9,6 +9,7 @@
 ##下面是两种方案的实现:
 
 - 第一种实现
+	```
 	void insertSort(int inputArray[] ,const int arrayLength)
 	{
 		int i,j;
@@ -34,9 +35,10 @@
 			inputArray[i]=tempArray[i+1];
 		}
 	}
-
+	```
 
 - 第二种实现  
+	```
 	void insertSort(int inputArray[] , const int arrayLength)
 	{
 		int i,j;
@@ -62,9 +64,9 @@
 			inputArray[i]=tempArray[i+1];
 		}
 	}
-
+	```
 - 实验结果：
-
+	```
 	#include <stdio.h>
 	#include <stdlib.h>  
 
@@ -96,6 +98,7 @@
 		printArray(array,sizeof(array)/4);
 		return 0;
 	}
-
+	```
+	
 <p><a href="http://blog.csdn.net/ii1245712564/article/details/42079225">插入排序的博客地址:http://blog.csdn.net/ii1245712564/article/details/42079225</a></p>
 

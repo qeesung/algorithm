@@ -5,10 +5,7 @@
 
 using namespace std;
 
-
 #define MAXTRIX_CHAIN_LENGTH 6
-
-
 
 unsigned int mulCost[MAXTRIX_CHAIN_LENGTH][MAXTRIX_CHAIN_LENGTH];
 unsigned int solution[MAXTRIX_CHAIN_LENGTH][MAXTRIX_CHAIN_LENGTH];
@@ -86,6 +83,3 @@ int main(int argc, char const *argv[])
     while(1);
     return 0;
 }
-
-
-

@@ -5,10 +5,7 @@
 
 using namespace std;
 
-
 #define MAXTRIX_CHAIN_LENGTH 3
-
-
 
 unsigned int mulCost[MAXTRIX_CHAIN_LENGTH][MAXTRIX_CHAIN_LENGTH];
 unsigned int dealMinCost(std::vector<pair<unsigned ,unsigned> > & matrixChain ,\

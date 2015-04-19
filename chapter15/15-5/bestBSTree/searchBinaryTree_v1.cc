@@ -1,0 +1,152 @@
+/*************************************************
+* @Filename:    searchBinaryTree_v1.cc
+* @Author:      qeesung
+* @Email:       qeesung@qq.com
+* @DateTime:    2015-04-19 09:48:21
+* @Version:     1.0
+* @Description: 最优二叉搜索树的算法实现，这里首先采用自上而下的求解方法
+**************************************************/
+
+
+#include <iostream>
+#include <vector>
+#include <utility>
+
+using namespace std;
+
+#define MAX_KEY_COUNT 10// 关键字的数量
+double dealBestBSTree(int i , int j ,\
+    std::vector<pair<string , double> > keyMap,\
+    std::vector<pair<string , double> > fKeyMap);
+/**
+ * 保存i到j的最优解开
+ * 为了就算e[i][i-1] e[j+1][j]这种情况，所以将行设了比列多大一维
+ */
+double minWeightArray[MAX_KEY_COUNT+2][MAX_KEY_COUNT+1];
+
+/**
+ * 为了保存weight i到j的权重之和，不用每次都计算
+ * 为了计算weigh[i][i-1]情况，行比列多了一维
+ */
+double weight[MAX_KEY_COUNT+2][MAX_KEY_COUNT+1];
+
+/**
+ * 为了递归计算出weight[i][j]的值
+ * @param  i       左边界，需要从1开始
+ * @param  j       右边界
+ * @param  keyMap  关键字序列
+ * @param  fKeyMap 伪关键字序列
+ * @return         i到j的权重
+ */
+double computeWeight(int i , int j , \
+    std::vector<pair<string , double> > keyMap,\
+    std::vector<pair<string , double> > fKeyMap)
+{
+    if(i-1 == j)
+        weight[i][j] = fKeyMap[j].second;
+    else
+        weight[i][j]=computeWeight(i , j-1 , keyMap , fKeyMap)+keyMap[j].second+fKeyMap[j].second;
+    return weight[i][j];
+}
+
+/**
+ * 最优二叉搜索树的接口
+ * @param keyMap  关键字序列
+ * @param fKeyMap 伪关键字序列
+ * @return 返回最优二叉搜索树的权重
+ */
+double bestBSTree(std::vector<pair<string , double> > keyMap,\
+    std::vector<pair<string , double> > fKeyMap)
+{
+    if(keyMap.size()-1 > MAX_KEY_COUNT)
+    {
+        cerr<<"key count should less than "<<MAX_KEY_COUNT<<endl;
+        return 0.0; 
+    }
+    /** 多次初始化i到j的权重 */
+    for (int k = 1 ; k <= keyMap.size()-1+1 ; ++k)
+    {
+        computeWeight(k , keyMap.size()-1 , keyMap , fKeyMap);
+    }
+    cout<<"weight array"<<endl;
+    for (int i =1 ; i<= keyMap.size() ; ++i)
+    {
+        for (int j = 0 ; j<keyMap.size() ; ++j)
+        {
+            cout<<weight[i][j]<<"\t";
+        }
+        cout<<endl;
+    }
+    // 现在已经将权重数据全都保存到weight里面了
+    // 
+    // 开始计算最优
+    dealBestBSTree(1,keyMap.size()-1,keyMap , fKeyMap);
+    cout<<"min weight array"<<endl;
+    for (int i =1 ; i<= keyMap.size() ; ++i)
+    {
+        for (int j = 0 ; j<keyMap.size() ; ++j)
+        {
+            cout<<minWeightArray[i][j]<<"\t";
+        }
+        cout<<endl;
+    }
+    return minWeightArray[1][keyMap.size()-1];
+}
+
+
+/**
+ * 最优二叉搜索树的实际递归函数
+ * @param  i       左边界
+ * @param  j       右边界
+ * @param  keyMap  关键字序列
+ * @param  fKeyMap 伪关键字序列
+ * @return         i到j的最优值
+ */
+double dealBestBSTree(int i , int j ,\
+    std::vector<pair<string , double> > keyMap,\
+    std::vector<pair<string , double> > fKeyMap)
+{
+    if(i-1 == j)
+    {
+        minWeightArray[i][j] = weight[i][j];    
+        return weight[i][j];
+    }
+    if(minWeightArray[i][j]!=0)
+        return minWeightArray[i][j];
+    // 表示没有被计算过，现在开始计算
+    double min= 10.0;
+    for(int k = i ; k <= j ; ++k)
+    {
+        double temp = dealBestBSTree(i , k-1 , keyMap , fKeyMap)+\
+                      dealBestBSTree(k+1,j , keyMap  , fKeyMap)+weight[i][j];
+        if(temp < min)
+            min = temp;
+    }
+    minWeightArray[i][j] = min;
+    return min;
+}
+
+int main(int argc, char const *argv[])
+{
+    std::vector<pair<string , double> > keyMap;
+    std::vector<pair<string , double> > fKeyMap;
+    // keyMap[0]是用不到的，只是为了填充，因为关键字是从1开始的
+    keyMap.push_back(pair<string , double>("k1", 0.15));
+    keyMap.push_back(pair<string , double>("k1", 0.15));
+    keyMap.push_back(pair<string , double>("k2", 0.1));
+    keyMap.push_back(pair<string , double>("k3", 0.05));
+    keyMap.push_back(pair<string , double>("k4", 0.1));
+    keyMap.push_back(pair<string , double>("k5", 0.2));
+
+    fKeyMap.push_back(pair<string , double>("d0", 0.05));
+    fKeyMap.push_back(pair<string , double>("d1", 0.1));
+    fKeyMap.push_back(pair<string , double>("d2", 0.05));
+    fKeyMap.push_back(pair<string , double>("d3", 0.05));
+    fKeyMap.push_back(pair<string , double>("d4", 0.05));
+    fKeyMap.push_back(pair<string , double>("d5", 0.1));
+
+    cout<<"The binary search tree min weight is:"<<bestBSTree(keyMap , fKeyMap)<<endl;
+    while(1);
+
+    return 0;
+}

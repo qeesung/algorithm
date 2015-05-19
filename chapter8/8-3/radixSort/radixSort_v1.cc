@@ -4,7 +4,7 @@
 * @Email:       qeesung@qq.com
 * @DateTime:    2015-05-17 13:06:32
 * @Version:     1.0
-* @Description: 基数排序
+* @Description: 基数排序基于基数排序
 **************************************************/
 
 #include <iostream>
@@ -123,7 +123,7 @@ int main(int argc, char const *argv[])
     cout<<"before sort array :"<<endl;
     printArray(inArray , arraySize);
 
-    radixSort(inArray , arraySize , 1 ,4 );
+    radixSort(inArray , arraySize , 1 ,4);
     cout<<"after sort array"<<endl;
     printArray(inArray , arraySize);
     while(1);

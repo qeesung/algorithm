@@ -32,8 +32,8 @@ class MinMaxPair
 {
 public:
     MinMaxPair(int _minPos = -1 , int _maxPos = -1):minPos(_minPos),maxPos(_maxPos){}
-    size_t minPos;
-    size_t maxPos;
+    int minPos;
+    int maxPos;
     bool operator==(const MinMaxPair & pair)
     {
         return (this->minPos == pair.minPos && this->maxPos == pair.maxPos);

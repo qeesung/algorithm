@@ -21,7 +21,7 @@ using namespace std;
  * @param  minNumber 输出最小值
  * @return           最小值在数组里面的位置
  */
-size_t findMin(int array[] , int arraySize , int * minNumber)
+int findMin(int array[] , int arraySize , int * minNumber)
 {
     if(array == NULL || arraySize < 0 || minNumber == NULL)
         return -1;

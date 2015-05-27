@@ -81,6 +81,7 @@ int main(int argc, char const *argv[])
         fprintf(stderr, "%s\n","pop failed" );
     print_intStack(myStack);
     fprintf(stderr, "%s\n","test all -------------------------------------------" );
+    destory_intStack(myStack);
     return 0;
 }
 

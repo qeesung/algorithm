@@ -8,6 +8,7 @@
 **************************************************/
 #include "c_stack_int.h"
 #include <stdlib.h>
+static void freeList(StackNode tempNode);
 
 bool push_intStack(Stack stack , int number)
 {
@@ -56,4 +57,35 @@ void print_intStack(Stack stack)
         tempNode = tempNode->next;
     }
     printf("\n");
+}
+
+void destory_intStack(Stack stack)
+{
+    if(stack == NULL ||\
+       stack->buttom == NULL ||\
+       stack->top == NULL)
+        return;
+    StackNode tempNode = stack->buttom;
+    freeList(tempNode);
+}
+
+void clear(Stack stack)
+{
+    if(stack == NULL ||\
+       stack->buttom == NULL ||\
+       stack->top == NULL)
+        return;
+    StackNode tempNode = stack->buttom->next;
+    freeList(tempNode);
+    stack->top = stack->buttom;
+}
+
+static void freeList(StackNode tempNode)
+{
+    while(tempNode!=NULL)
+    {
+        StackNode temp = tempNode->next;
+        free((IntStackNode)tempNode);
+        tempNode = temp;
+    }
 }

@@ -27,5 +27,7 @@ bool push_intStack(Stack , int number);
 bool pop_intStack(Stack , int * number);
 bool topValue_intStack(Stack , int * number);
 void print_intStack(Stack);
+void destory_intStack(Stack);
+void clear(Stack);
 
 #endif

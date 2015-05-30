@@ -26,7 +26,7 @@ private:
     Elem * array;// 数组指针
 public:
     ArrayBaseQueue(size_t _array_size=10) throw(std::bad_alloc);
-    ~ArrayBaseQueue() throw();
+    ~ArrayBaseQueue();
 
     /** 清空队列 */
     void clear();

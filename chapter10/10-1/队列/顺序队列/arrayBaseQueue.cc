@@ -24,15 +24,15 @@ ArrayBaseQueue<Elem>::ArrayBaseQueue(size_t _array_size) throw(std::bad_alloc)
         std::cout<<"create queue failed "<<std::endl;
         throw;
     }
-    front == 0;
+    front = 0;
     rear = front;
     m_length = 0;
 }
 
 template <class Elem>
-ArrayBaseQueue<Elem>::~ArrayBaseQueue() throw()
+ArrayBaseQueue<Elem>::~ArrayBaseQueue()
 {
-    delete []array;
+    delete [] array;
 }
 
 

@@ -56,11 +56,11 @@ bool DirectAddr<T>::direct_insert (DataNode<T> & node)
 {
 	if(node.get_key() <key_min || node.get_key()>key_max)
 		return false;	
-	DataNode<T> * tempNode = array[node.get_key()].next;
-DataNode<T> * newNode = new DataNode<T>(node.get_key() , node.get_data(), tempNode);
+	DataNode<T> * tempNode = array[node.get_key() - key_min].next;
+	DataNode<T> * newNode = new DataNode<T>(node.get_key() , node.get_data(), tempNode);
 	if(newNode == NULL)
 		return false;
-	array[node.get_key()].next = newNode;
+	array[node.get_key() - key_min].next = newNode;
 	return true;
 }		/** -----  end of method DirectAddr<T>::direct_insert  ----- */
 
@@ -72,7 +72,7 @@ bool DirectAddr<T>::direct_delete (DataNode<T> & node)
 {
 	if(node.get_key()<key_min || node.get_key()>key_max)
 		return false;
-	DataNode<T> * targetNode = &array[node.get_key()];
+	DataNode<T> * targetNode = &array[node.get_key() - key_min];
 	/*  找到需要删除的点 */
 	while(targetNode->next != NULL && targetNode->next->get_data()!=node.get_data())
 	{
@@ -94,7 +94,7 @@ std::vector<T> DirectAddr<T>::direct_search (int key)
 	if(key<key_min || key>key_max)
 		return std::vector<T>();
 	std::vector<T> retVec;
-	DataNode<T> * tempNode = array[key].next;
+	DataNode<T> * tempNode = array[key - key_min].next;
 	while(tempNode != NULL)
 	{
 		retVec.push_back(tempNode->get_data());
@@ -109,7 +109,7 @@ void DirectAddr<T>::clear ()
 {
 	for(int i = 0 ; i < table_size ; ++i)
 	{
-		deleteAllNode(array[i].next);
+		deleteAllNode(array[i - key_min].next);
 	}
 	return ;
 }		/** -----  end of method DirectAddr<T>::clear  ----- */
@@ -138,7 +138,7 @@ void DirectAddr<T>::printToVec (std::vector<std::vector<T> > & vec)
 	for ( int i = 0 ; i < table_size;++i )
 	{
 		std::vector<T> tempVec;
-		DataNode<T> * tempNode = array[i].next;
+		DataNode<T> * tempNode = array[i - key_min].next;
 		while(tempNode!=NULL)
 		{
 			tempVec.push_back(tempNode->get_data());

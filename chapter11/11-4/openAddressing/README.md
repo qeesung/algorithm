@@ -16,11 +16,11 @@
 >make
 
 如果没有安装cppunit，你可以在你的源文件中直接加入`#include "open_addressing.h"`，之后再编译你的源文件
->g++ yourSourceFile.cc -o openAddressing
+>g++ yourSourceFile.cc -o testOpenAddressing
 
 ---
 **运行方法**
->./openAddressing
+>./testOpenAddressing
 
 [TOC]
 

@@ -15,7 +15,7 @@
 如果你安装了cppunit，那么直接执行下面命令
 >make
 
-如果没有安装cppunit，你可以在你的源文件中直接包含`./open_addressing.h`即可，之后再编译你的源文件
+如果没有安装cppunit，你可以在你的源文件中直接加入`#include "open_addressing.h"`，之后再编译你的源文件
 >g++ yourSourceFile.cc -o openAddressing
 
 ---

@@ -1,0 +1,19 @@
+%{
+#include "person_data_type.h"
+#include <cstring>
+%}
+struct person_data_type;
+%%
+qeesung,23,MALE
+tom,18,MALE
+beryl,20,FEMALE
+cat,12,MALE
+adolph,78,MALE
+lucy,22,FEMALE
+william,45,MALE
+linus,46,MALE
+jack,7,MALE
+alice,20,FEMALE
+%%
+
+
